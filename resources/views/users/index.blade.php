@@ -25,6 +25,7 @@
             
             <div style="margin-bottom:1.5em"><small class="text-muted" style="font-size:20px">User stats</small></div>
             <h4><i class="glyphicon glyphicon-align-left"></i> Level: {{Auth::user()->level}}</h4>
+            <h4><i class="glyphicon glyphicon-flag"></i> Challenges Completed: {{Auth::user()->completed_challenges}}</h4>
         </div>
         
      @endif

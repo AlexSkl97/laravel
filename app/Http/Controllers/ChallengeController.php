@@ -40,7 +40,7 @@ class ChallengeController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
-            'key' => 'required',
+            'key' => 'required|unique:challenges',
             'level' => 'required',
             'challenge_image' => 'image|nullable|max:1999'
         ]);
@@ -117,7 +117,8 @@ class ChallengeController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'key' => 'unique:challenges'
         ]);
 
         if($request->hasFile('challenge_image')){
@@ -173,5 +174,28 @@ class ChallengeController extends Controller
 
         $challenge->delete();
         return redirect('/challenges')->with('success', 'Challenge deleted');
+    }
+
+    public function correctKey(Request $request){
+
+        $challenge = Challenge::find($request->input());
+        $user = Auth()->User();
+        if($request->input('challenge_input') == $challenge->key){  
+            $challenge->completed = 1;
+            $challenge->save();
+            if($user->challenges_completed != null ){
+                $user->challenges_completed = Auth()->User()->challenges_completed.' ,'.$challenge->title;
+                $user->save();
+            }
+            else{
+                $user->challenges_completed = $challenge->title;
+                $user->save();
+            }
+            return redirect('/challenges')->with('success', 'Challenge completed!');
+        }
+        else{
+            return redirect('/challenges')->with('error', 'Incorrect key!');
+        }
+
     }
 }

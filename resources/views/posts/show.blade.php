@@ -44,10 +44,10 @@
         x[slideIndex-1].style.display = "block";  
     }
     </script>
-    {!!Form::open(['action' => ['PostController@addLikes', $post->id], 'method' => 'POST'])!!}
+    {{-- {!!Form::open(['action' => ['PostController@addLikes', $post->id], 'method' => 'POST'])!!}
     {{-- {{Form::hidden('_method', 'DELETE')}} --}}
-    {{Form::submit('Like', ['class' => 'glyphicon glyphicon-thumbs-up'])}}
-    {!!Form::close() !!}
+    {{-- {{Form::submit('Like', ['class' => 'glyphicon glyphicon-thumbs-up'])}}
+    {!!Form::close() !!} --}} 
 
     <h3>Post title: {{$post->title}}</h3>
     <hr>

@@ -27,4 +27,15 @@
     <hr>
     <small>created at {{$challenge->created_at}}</small>
     <hr>
+    @if($challenge->completed == 0){
+        <form action="{{route('challenge_input')}}" method="GET">
+            <input type="text" name="challenge_input" id="challenge_input" value="{{ request()->input('challenge_input') }}"  placeholder="Enter the key here!">
+                <button type="submit"><i>GO</i></button>
+        </form>
+    }
+        
+    @elseif($challenge->completed == 1)
+         <p>This challenge is finished!</p>
+    @endif
+    
 @endsection
