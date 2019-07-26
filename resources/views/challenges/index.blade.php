@@ -23,15 +23,17 @@
                             
                         </div>
                         <div>
-                            <h3>{{$challenge->title}}</h3>                            {{-- {!! $challenge->body !!} --}}
-                            @if(Auth()->User()->level >= $challenge->level || Auth()->User()->isAdmin() == 2)
-                                <a class="btn btn-primary" href="/challenges/{{$challenge->id}}">Enroll</a>
-                            @else
-                                
-                                <div class="alert alert-info" style="float:left">
-                                   You must reach level <strong>{{$challenge->level}}</strong> to unlock this challenge! 
-                                </div>
-                                
+                            <h3>{{$challenge->title}}</h3>     
+                            @if(!Auth::guest())                       {{-- {!! $challenge->body !!} --}}
+                                @if(Auth()->User()->level >= $challenge->level || Auth()->User()->isAdmin() == 2)
+                                    <a class="btn btn-primary" href="/challenges/{{$challenge->id}}">Enroll</a>
+                                @else
+                                    
+                                    <div class="alert alert-info" style="float:left">
+                                    You must reach level <strong>{{$challenge->level}}</strong> to unlock this challenge! 
+                                    </div>
+                                    
+                                @endif
                             @endif
                         </div>
                     

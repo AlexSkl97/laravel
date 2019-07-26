@@ -36,4 +36,4 @@ Route::resource('challenges', 'ChallengeController');
 
 Route::post('/addLikes', 'PostController@addLikes')->name('addLikes');
 
-Route::get('/challenge_input', 'ChallengeController@correctKey')->name('challenge_input');
+Route::post('/challenge_input', 'ChallengeController@correctKey')->name('challenge_input');
